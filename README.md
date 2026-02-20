@@ -11,7 +11,7 @@ This library uses the native `EmbeddedComponentManager` and `AccountOnboardingCo
 - Configurable Terms of Service and Privacy Policy URLs
 - Collection options (`currently_due` / `eventually_due`, `futureRequirements`)
 - Load error event listener
-- Expo support via config plugin (development builds)
+- Compatible with Expo development builds
 
 ## Requirements
 
@@ -52,36 +52,21 @@ No additional setup required. The `com.stripe:connect` dependency is included au
 
 ### Expo
 
-This library includes an Expo config plugin that automatically adds `NSCameraUsageDescription` to your iOS `Info.plist`.
+This library works with Expo **development builds** (`expo prebuild` / EAS Build). It does **not** work with Expo Go since it contains native code.
 
-Add it to `app.json` / `app.config.js`:
-
-```json
-{
-  "expo": {
-    "plugins": ["@banrendi/stripe-connect-wrapper"]
-  }
-}
-```
-
-You can optionally customize the camera permission text:
+Add `NSCameraUsageDescription` to your `app.json`:
 
 ```json
 {
   "expo": {
-    "plugins": [
-      [
-        "@banrendi/stripe-connect-wrapper",
-        {
-          "cameraPermissionText": "We need camera access to verify your identity."
-        }
-      ]
-    ]
+    "ios": {
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to capture identity documents during account onboarding."
+      }
+    }
   }
 }
 ```
-
-Then build with `expo prebuild` or EAS Build. **This library does not work with Expo Go** since it contains native code.
 
 ## Server-side Setup
 

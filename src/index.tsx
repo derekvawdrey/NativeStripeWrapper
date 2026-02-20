@@ -82,6 +82,15 @@ export async function presentAccountOnboarding(
 export function onLoadError(
   callback: (error: { type: string; message: string }) => void
 ): () => void {
-  const sub = emitter.addListener('onLoadError', callback);
+  const sub = emitter.addListener(
+    'onLoadError',
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (event: any) => {
+      callback({
+        type: String(event?.type ?? 'unknown'),
+        message: String(event?.message ?? ''),
+      });
+    }
+  );
   return () => sub.remove();
 }
