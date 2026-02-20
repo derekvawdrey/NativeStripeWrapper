@@ -8,7 +8,7 @@ import StripeConnect
     func bridgeDidFailLoad(type: String, message: String)
 }
 
-@objc public class StripeConnectBridge: NSObject {
+@objc public class StripeConnectBridge: NSObject, @unchecked Sendable {
 
     @objc public weak var delegate: StripeConnectBridgeDelegate?
 
@@ -23,7 +23,8 @@ import StripeConnect
 
         embeddedComponentManager = EmbeddedComponentManager(
             fetchClientSecret: { [weak self] in
-                return await self?.requestClientSecret()
+                guard let self else { return nil }
+                return await self.requestClientSecret()
             }
         )
     }
@@ -51,24 +52,21 @@ import StripeConnect
             privacyUrl = URL(string: urlString)
         }
 
-        var collectionOptions: AccountCollectionOptions?
-        if collectionOptionsFields != nil || collectionOptionsFutureRequirements != nil {
-            collectionOptions = AccountCollectionOptions()
-            if let fields = collectionOptionsFields {
-                switch fields {
-                case "eventually_due":
-                    collectionOptions?.fields = .eventuallyDue
-                default:
-                    collectionOptions?.fields = .currentlyDue
-                }
+        var collectionOptions = AccountCollectionOptions()
+        if let fields = collectionOptionsFields {
+            switch fields {
+            case "eventually_due":
+                collectionOptions.fields = .eventuallyDue
+            default:
+                collectionOptions.fields = .currentlyDue
             }
-            if let future = collectionOptionsFutureRequirements {
-                switch future {
-                case "include":
-                    collectionOptions?.futureRequirements = .include
-                default:
-                    collectionOptions?.futureRequirements = .omit
-                }
+        }
+        if let future = collectionOptionsFutureRequirements {
+            switch future {
+            case "include":
+                collectionOptions.futureRequirements = .include
+            default:
+                collectionOptions.futureRequirements = .omit
             }
         }
 

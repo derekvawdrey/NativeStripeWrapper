@@ -24,9 +24,7 @@ const emitter = new NativeEventEmitter(
 );
 
 let fetchClientSecretCallback: FetchClientSecret | null = null;
-let listenerSubscription: ReturnType<
-  typeof emitter.addListener
-> | null = null;
+let listenerSubscription: ReturnType<typeof emitter.addListener> | null = null;
 
 export function initialize(
   publishableKey: string,
@@ -84,7 +82,6 @@ export function onLoadError(
 ): () => void {
   const sub = emitter.addListener(
     'onLoadError',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (event: any) => {
       callback({
         type: String(event?.type ?? 'unknown'),
