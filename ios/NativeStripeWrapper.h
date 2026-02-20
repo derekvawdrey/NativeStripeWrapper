@@ -1,5 +1,6 @@
+#import <React/RCTEventEmitter.h>
 #import <NativeStripeWrapperSpec/NativeStripeWrapperSpec.h>
 
-@interface NativeStripeWrapper : NSObject <NativeNativeStripeWrapperSpec>
+@interface NativeStripeWrapper : RCTEventEmitter <NativeNativeStripeWrapperSpec>
 
 @end

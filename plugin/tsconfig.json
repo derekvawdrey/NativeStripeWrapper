@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "outDir": "../lib/plugin",
+    "rootDir": "src",
+    "strict": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2020",
+    "declaration": true,
+    "skipLibCheck": true
+  },
+  "include": ["src"]
+}
