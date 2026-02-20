@@ -80,14 +80,11 @@ export async function presentAccountOnboarding(
 export function onLoadError(
   callback: (error: { type: string; message: string }) => void
 ): () => void {
-  const sub = emitter.addListener(
-    'onLoadError',
-    (event: any) => {
-      callback({
-        type: String(event?.type ?? 'unknown'),
-        message: String(event?.message ?? ''),
-      });
-    }
-  );
+  const sub = emitter.addListener('onLoadError', (event: any) => {
+    callback({
+      type: String(event?.type ?? 'unknown'),
+      message: String(event?.message ?? ''),
+    });
+  });
   return () => sub.remove();
 }
