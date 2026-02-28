@@ -1,7 +1,7 @@
 #import "NativeStripeWrapper.h"
 
-#if __has_include(<NativeStripeWrapper/NativeStripeWrapper-Swift.h>)
-#import <NativeStripeWrapper/NativeStripeWrapper-Swift.h>
+#if __has_include(<StripeConnectWrapper/NativeStripeWrapper-Swift.h>)
+#import <StripeConnectWrapper/NativeStripeWrapper-Swift.h>
 #else
 #import "NativeStripeWrapper-Swift.h"
 #endif
