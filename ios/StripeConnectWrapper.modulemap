@@ -1,0 +1,9 @@
+framework module StripeConnectWrapper {
+  umbrella header "NativeStripeWrapper.h"
+  export *
+}
+module StripeConnectWrapper.Swift {
+  header "NativeStripeWrapper-Swift.h"
+  export *
+  requires objc
+}

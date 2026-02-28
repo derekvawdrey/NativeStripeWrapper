@@ -54,6 +54,18 @@ No additional setup required. The `com.stripe:connect` dependency is included au
 
 This library works with Expo **development builds** (`expo prebuild` / EAS Build). It does **not** work with Expo Go since it contains native code.
 
+If you install the library from a **GitHub URL** or **local path** (`file:`), CocoaPods may not install the `StripeConnect` pod automatically. Add the config plugin so the StripeConnect pod is added to your Podfile when you run `expo prebuild`:
+
+```json
+{
+  "expo": {
+    "plugins": ["@banrendi/stripe-connect-wrapper/expo-plugin"]
+  }
+}
+```
+
+Then run `npx expo prebuild -p ios` (or a full prebuild). You do **not** need to add `pod 'StripeConnect'` to your Podfile manually.
+
 Add `NSCameraUsageDescription` to your `app.json`:
 
 ```json

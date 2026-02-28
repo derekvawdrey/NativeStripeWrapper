@@ -15,7 +15,7 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/derekvawdrey/banrendi-stripe-connect-wrapper.git", :tag => "#{s.version}" }
 
   s.source_files = "ios/**/*.{h,m,mm,swift,cpp}"
-  s.private_header_files = "ios/**/*.h"
+  s.module_map = "ios/StripeConnectWrapper.modulemap"
 
   s.dependency 'StripeConnect'
 
