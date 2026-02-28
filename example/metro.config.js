@@ -7,7 +7,9 @@ const root = path.resolve(__dirname, '..');
 /** Resolve package root for @banrendi/stripe-connect-wrapper (workspace or node_modules) */
 function getStripeConnectWrapperSourcePath() {
   try {
-    const pkgJson = require.resolve('@banrendi/stripe-connect-wrapper/package.json');
+    const pkgJson = require.resolve(
+      '@banrendi/stripe-connect-wrapper/package.json'
+    );
     return path.join(path.dirname(pkgJson), 'src', 'index.tsx');
   } catch {
     return null;
