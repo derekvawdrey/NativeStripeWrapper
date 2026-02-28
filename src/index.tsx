@@ -1,5 +1,5 @@
 import { NativeEventEmitter, Platform } from 'react-native';
-import NativeStripeWrapper from './NativeNativeStripeWrapper';
+import NativeStripeWrapper from './BanrendiNativeStripeWrapper';
 
 export type CollectionOptionsFields = 'currently_due' | 'eventually_due';
 export type FutureRequirements = 'omit' | 'include';

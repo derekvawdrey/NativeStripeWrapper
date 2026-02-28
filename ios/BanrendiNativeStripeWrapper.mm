@@ -1,4 +1,4 @@
-#import "NativeStripeWrapper.h"
+#import "BanrendiNativeStripeWrapper.h"
 
 #if __has_include(<BanrendiNativeStripeWrapper/BanrendiNativeStripeWrapper-Swift.h>)
 #import <BanrendiNativeStripeWrapper/BanrendiNativeStripeWrapper-Swift.h>

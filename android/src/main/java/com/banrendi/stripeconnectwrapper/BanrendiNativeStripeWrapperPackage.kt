@@ -7,10 +7,10 @@ import com.facebook.react.module.model.ReactModuleInfo
 import com.facebook.react.module.model.ReactModuleInfoProvider
 import java.util.HashMap
 
-class NativeStripeWrapperPackage : BaseReactPackage() {
+class BanrendiNativeStripeWrapperPackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
-    return if (name == NativeStripeWrapperModule.NAME) {
-      NativeStripeWrapperModule(reactContext)
+    return if (name == BanrendiNativeStripeWrapperModule.NAME) {
+      BanrendiNativeStripeWrapperModule(reactContext)
     } else {
       null
     }
@@ -19,9 +19,9 @@ class NativeStripeWrapperPackage : BaseReactPackage() {
   override fun getReactModuleInfoProvider(): ReactModuleInfoProvider {
     return ReactModuleInfoProvider {
       val moduleInfos: MutableMap<String, ReactModuleInfo> = HashMap()
-      moduleInfos[NativeStripeWrapperModule.NAME] = ReactModuleInfo(
-        NativeStripeWrapperModule.NAME,
-        NativeStripeWrapperModule.NAME,
+      moduleInfos[BanrendiNativeStripeWrapperModule.NAME] = ReactModuleInfo(
+        BanrendiNativeStripeWrapperModule.NAME,
+        BanrendiNativeStripeWrapperModule.NAME,
         false,  // canOverrideExistingModule
         false,  // needsEagerInit
         false,  // isCxxModule

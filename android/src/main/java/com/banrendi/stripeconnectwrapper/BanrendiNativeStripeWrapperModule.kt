@@ -17,7 +17,7 @@ import com.stripe.android.connect.FetchClientSecret
 import com.stripe.android.connect.StripeComponentController
 import kotlinx.coroutines.CompletableDeferred
 
-class NativeStripeWrapperModule(reactContext: ReactApplicationContext) :
+class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
     NativeNativeStripeWrapperSpec(reactContext) {
 
     private var publishableKey: String? = null

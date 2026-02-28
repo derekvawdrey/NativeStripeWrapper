@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "NativeStripeWrapperExample.app"
-               BlueprintName = "NativeStripeWrapperExample"
-               ReferencedContainer = "container:NativeStripeWrapperExample.xcodeproj">
+               BuildableName = "BanrendiNativeStripeWrapperExample.app"
+               BlueprintName = "BanrendiNativeStripeWrapperExample"
+               ReferencedContainer = "container:BanrendiNativeStripeWrapperExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "NativeStripeWrapperExampleTests.xctest"
-               BlueprintName = "NativeStripeWrapperExampleTests"
-               ReferencedContainer = "container:NativeStripeWrapperExample.xcodeproj">
+               BuildableName = "BanrendiNativeStripeWrapperExampleTests.xctest"
+               BlueprintName = "BanrendiNativeStripeWrapperExampleTests"
+               ReferencedContainer = "container:BanrendiNativeStripeWrapperExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "NativeStripeWrapperExample.app"
-            BlueprintName = "NativeStripeWrapperExample"
-            ReferencedContainer = "container:NativeStripeWrapperExample.xcodeproj">
+            BuildableName = "BanrendiNativeStripeWrapperExample.app"
+            BlueprintName = "BanrendiNativeStripeWrapperExample"
+            ReferencedContainer = "container:BanrendiNativeStripeWrapperExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "NativeStripeWrapperExample.app"
-            BlueprintName = "NativeStripeWrapperExample"
-            ReferencedContainer = "container:NativeStripeWrapperExample.xcodeproj">
+            BuildableName = "BanrendiNativeStripeWrapperExample.app"
+            BlueprintName = "BanrendiNativeStripeWrapperExample"
+            ReferencedContainer = "container:BanrendiNativeStripeWrapperExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
