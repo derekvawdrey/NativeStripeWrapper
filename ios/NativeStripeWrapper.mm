@@ -1,9 +1,9 @@
 #import "NativeStripeWrapper.h"
 
-#if __has_include(<StripeConnectWrapper/NativeStripeWrapper-Swift.h>)
-#import <StripeConnectWrapper/NativeStripeWrapper-Swift.h>
+#if __has_include(<BanrendiNativeStripeWrapper/BanrendiNativeStripeWrapper-Swift.h>)
+#import <BanrendiNativeStripeWrapper/BanrendiNativeStripeWrapper-Swift.h>
 #else
-#import "NativeStripeWrapper-Swift.h"
+#import "BanrendiNativeStripeWrapper-Swift.h"
 #endif
 
 @interface NativeStripeWrapper () <StripeConnectBridgeDelegate>

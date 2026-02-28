@@ -3,8 +3,7 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name         = "NativeStripeWrapper"
-  s.module_name  = "StripeConnectWrapper"
+  s.name         = "BanrendiNativeStripeWrapper"
   s.version      = package["version"]
   s.summary      = package["description"]
   s.homepage     = package["homepage"]
@@ -14,9 +13,8 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => min_ios_version_supported }
   s.source       = { :git => "https://github.com/derekvawdrey/banrendi-stripe-connect-wrapper.git", :tag => "#{s.version}" }
 
-  s.static_framework = true
   s.source_files = "ios/**/*.{h,m,mm,swift,cpp}"
-  s.module_map = "ios/StripeConnectWrapper.modulemap"
+  s.private_header_files = "ios/**/*.h"
 
   s.dependency 'StripeConnect'
 
