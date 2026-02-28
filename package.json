@@ -1,6 +1,7 @@
 {
   "name": "@banrendi/stripe-connect-wrapper",
   "version": "0.1.0",
+  "private": true,
   "description": "A React Native wrapper over StripeiOS and StripeAndroid to provide embedded functionality for stripe-connect",
   "main": "./lib/module/index.js",
   "types": "./lib/typescript/src/index.d.ts",
