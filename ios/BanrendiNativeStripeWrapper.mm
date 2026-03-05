@@ -6,6 +6,8 @@
 #import "BanrendiNativeStripeWrapper-Swift.h"
 #endif
 
+#import <React/RCTBridgeModule.h>
+
 @interface NativeStripeWrapper () <StripeConnectBridgeDelegate>
 @end
 
@@ -29,10 +31,7 @@
     return @"NativeStripeWrapper";
 }
 
-- (std::shared_ptr<facebook::react::TurboModule>)getTurboModule:
-    (const facebook::react::ObjCTurboModule::InitParams &)params {
-    return std::make_shared<facebook::react::NativeNativeStripeWrapperSpecJSI>(params);
-}
+RCT_EXPORT_MODULE(NativeStripeWrapper)
 
 + (BOOL)requiresMainQueueSetup {
     return NO;
@@ -52,12 +51,14 @@
     _hasListeners = NO;
 }
 
-#pragma mark - TurboModule methods
+#pragma mark - Bridge methods
 
+RCT_EXPORT_METHOD(initialize:)
 - (void)initialize:(NSString *)publishableKey {
     [_bridge initializeWithPublishableKey:publishableKey];
 }
 
+RCT_EXPORT_METHOD(presentAccountOnboarding:resolve:reject:)
 - (void)presentAccountOnboarding:(NSDictionary *)options
                          resolve:(RCTPromiseResolveBlock)resolve
                           reject:(RCTPromiseRejectBlock)reject {
@@ -91,14 +92,17 @@
     });
 }
 
+RCT_EXPORT_METHOD(provideClientSecret:)
 - (void)provideClientSecret:(NSString *)secret {
     [_bridge provideClientSecret:secret];
 }
 
+RCT_EXPORT_METHOD(addListener:)
 - (void)addListener:(NSString *)eventName {
     // Required for RCTEventEmitter
 }
 
+RCT_EXPORT_METHOD(removeListeners:)
 - (void)removeListeners:(double)count {
     // Required for RCTEventEmitter
 }

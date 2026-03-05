@@ -10,7 +10,7 @@ import java.util.HashMap
 class BanrendiNativeStripeWrapperPackage : BaseReactPackage() {
   override fun getModule(name: String, reactContext: ReactApplicationContext): NativeModule? {
     return if (name == BanrendiNativeStripeWrapperModule.NAME) {
-      BanrendiNativeStripeWrapperModule(reactContext)
+      BanrendiNativeStripeWrapperModule(reactContext) as NativeModule
     } else {
       null
     }

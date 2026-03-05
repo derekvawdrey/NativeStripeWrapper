@@ -7,6 +7,8 @@ import androidx.fragment.app.FragmentActivity
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.Promise
 import com.facebook.react.bridge.ReactApplicationContext
+import com.facebook.react.bridge.ReactContextBaseJavaModule
+import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.ReadableMap
 import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.stripe.android.connect.AccountOnboardingController
@@ -18,7 +20,7 @@ import com.stripe.android.connect.StripeComponentController
 import kotlinx.coroutines.CompletableDeferred
 
 class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
-    NativeNativeStripeWrapperSpec(reactContext) {
+    ReactContextBaseJavaModule(reactContext) {
 
     private var publishableKey: String? = null
     private var embeddedComponentManager: EmbeddedComponentManager? = null
@@ -27,11 +29,14 @@ class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
     private var onboardingPromise: Promise? = null
     private var activityCallbacksRegistered = false
 
+    override fun getName(): String = NAME
+
     companion object {
-        const val NAME = NativeNativeStripeWrapperSpec.NAME
+        const val NAME = "NativeStripeWrapper"
     }
 
-    override fun initialize(publishableKey: String) {
+    @ReactMethod
+    fun initialize(publishableKey: String) {
         this.publishableKey = publishableKey
 
         embeddedComponentManager = EmbeddedComponentManager(
@@ -47,7 +52,8 @@ class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
         ensureActivityCallbacksRegistered()
     }
 
-    override fun presentAccountOnboarding(options: ReadableMap, promise: Promise) {
+    @ReactMethod
+    fun presentAccountOnboarding(options: ReadableMap, promise: Promise) {
         val manager = embeddedComponentManager
         if (manager == null) {
             promise.reject("ERR_NOT_INITIALIZED", "Call initialize() before presenting onboarding")
@@ -145,16 +151,19 @@ class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
         }
     }
 
-    override fun provideClientSecret(secret: String?) {
+    @ReactMethod
+    fun provideClientSecret(secret: String?) {
         clientSecretDeferred?.complete(secret)
         clientSecretDeferred = null
     }
 
-    override fun addListener(eventName: String?) {
+    @ReactMethod
+    fun addListener(eventName: String?) {
         // Required for event emitter support
     }
 
-    override fun removeListeners(count: Double) {
+    @ReactMethod
+    fun removeListeners(count: Double) {
         // Required for event emitter support
     }
 

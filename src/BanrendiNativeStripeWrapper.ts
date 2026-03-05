@@ -1,6 +1,6 @@
-import { TurboModuleRegistry, type TurboModule } from 'react-native';
+import { NativeModules } from 'react-native';
 
-export interface Spec extends TurboModule {
+export interface Spec {
   initialize(publishableKey: string): void;
   presentAccountOnboarding(options: Object): Promise<string>;
   provideClientSecret(secret: string | null): void;
@@ -8,4 +8,8 @@ export interface Spec extends TurboModule {
   removeListeners(count: number): void;
 }
 
-export default TurboModuleRegistry.getEnforcing<Spec>('NativeStripeWrapper');
+const { NativeStripeWrapper } = NativeModules;
+if (!NativeStripeWrapper) {
+  throw new Error('NativeStripeWrapper native module is not available');
+}
+export default NativeStripeWrapper as Spec;
