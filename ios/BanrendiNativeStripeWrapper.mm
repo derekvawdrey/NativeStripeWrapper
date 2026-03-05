@@ -27,10 +27,6 @@
     return self;
 }
 
-+ (NSString *)moduleName {
-    return @"NativeStripeWrapper";
-}
-
 RCT_EXPORT_MODULE(NativeStripeWrapper)
 
 + (BOOL)requiresMainQueueSetup {
@@ -53,15 +49,15 @@ RCT_EXPORT_MODULE(NativeStripeWrapper)
 
 #pragma mark - Bridge methods
 
-RCT_EXPORT_METHOD(initialize:)
-- (void)initialize:(NSString *)publishableKey {
+RCT_EXPORT_METHOD(initialize:(NSString *)publishableKey)
+{
     [_bridge initializeWithPublishableKey:publishableKey];
 }
 
-RCT_EXPORT_METHOD(presentAccountOnboarding:resolve:reject:)
-- (void)presentAccountOnboarding:(NSDictionary *)options
-                         resolve:(RCTPromiseResolveBlock)resolve
-                          reject:(RCTPromiseRejectBlock)reject {
+RCT_EXPORT_METHOD(presentAccountOnboarding:(NSDictionary *)options
+                  resolve:(RCTPromiseResolveBlock)resolve
+                  reject:(RCTPromiseRejectBlock)reject)
+{
     _onboardingResolve = resolve;
     _onboardingReject = reject;
 
@@ -92,18 +88,18 @@ RCT_EXPORT_METHOD(presentAccountOnboarding:resolve:reject:)
     });
 }
 
-RCT_EXPORT_METHOD(provideClientSecret:)
-- (void)provideClientSecret:(NSString *)secret {
+RCT_EXPORT_METHOD(provideClientSecret:(NSString *)secret)
+{
     [_bridge provideClientSecret:secret];
 }
 
-RCT_EXPORT_METHOD(addListener:)
-- (void)addListener:(NSString *)eventName {
+RCT_EXPORT_METHOD(addListener:(NSString *)eventName)
+{
     // Required for RCTEventEmitter
 }
 
-RCT_EXPORT_METHOD(removeListeners:)
-- (void)removeListeners:(double)count {
+RCT_EXPORT_METHOD(removeListeners:(double)count)
+{
     // Required for RCTEventEmitter
 }
 

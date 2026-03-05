@@ -62,7 +62,7 @@ class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
 
         onboardingPromise = promise
 
-        val activity = currentActivity
+        val activity = getCurrentActivity()
         if (activity == null || activity !is FragmentActivity) {
             promise.reject("ERR_NO_ACTIVITY", "No FragmentActivity available")
             onboardingPromise = null
@@ -168,7 +168,7 @@ class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
     }
 
     private fun sendEvent(eventName: String, params: com.facebook.react.bridge.WritableMap) {
-        reactApplicationContext
+        getReactApplicationContext()
             .getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
             .emit(eventName, params)
     }
@@ -177,7 +177,7 @@ class BanrendiNativeStripeWrapperModule(reactContext: ReactApplicationContext) :
         if (activityCallbacksRegistered) return
         activityCallbacksRegistered = true
 
-        val activity = currentActivity ?: return
+        val activity = getCurrentActivity() ?: return
         val app = activity.application
 
         app.registerActivityLifecycleCallbacks(object : Application.ActivityLifecycleCallbacks {
