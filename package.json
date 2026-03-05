@@ -112,7 +112,7 @@
     ]
   },
   "codegenConfig": {
-    "name": "NativeStripeWrapperSpec",
+    "name": "BanrendiNativeStripeWrapperSpec",
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
