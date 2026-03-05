@@ -13,20 +13,10 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => min_ios_version_supported }
   s.source       = { :git => "https://github.com/derekvawdrey/banrendi-stripe-connect-wrapper.git", :tag => "#{s.version}" }
 
-  # Parent module must be defined before Swift submodule in the modulemap. We supply a full
-  # modulemap (umbrella + Swift) and ensure the umbrella is a public header so it is copied
-  # into the framework Headers/ and findable from Modules/module.modulemap.
-  s.module_map            = "ios/module.modulemap"
-  s.preserve_paths        = "ios/module.modulemap"
-  s.public_header_files   = "ios/BanrendiNativeStripeWrapper.h", "ios/BanrendiNativeStripeWrapper-umbrella.h"
-  s.private_header_files  = []  # no private headers; avoids CocoaPods skipping parent module
-
-  s.pod_target_xcconfig   = {
-    "MODULEMAP_FILE" => "$(PODS_TARGET_SRCROOT)/ios/module.modulemap",
-    "BUILD_LIBRARY_FOR_DISTRIBUTION" => "NO"
-  }
-
-  s.source_files = "ios/**/*.{h,m,mm,swift,cpp}"
+  # One public header so CocoaPods generates an umbrella/parent module (required for mixed ObjC+Swift).
+  # No custom module_map so the pod can be built as a static library (RN default).
+  s.public_header_files = "ios/BanrendiNativeStripeWrapper.h"
+  s.source_files        = "ios/**/*.{h,m,mm,swift,cpp}"
 
   s.dependency 'StripeConnect'
 
