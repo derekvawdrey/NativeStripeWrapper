@@ -26,6 +26,20 @@ const emitter = new NativeEventEmitter(
 let fetchClientSecretCallback: FetchClientSecret | null = null;
 let listenerSubscription: ReturnType<typeof emitter.addListener> | null = null;
 
+/** Set to true to log client-secret flow to console (for debugging infinite spinner). */
+export let __DEBUG_CLIENT_SECRET = false;
+
+export function enableClientSecretDebug(enabled: boolean): void {
+  __DEBUG_CLIENT_SECRET = enabled;
+}
+
+function logDebug(msg: string, data?: unknown) {
+  if (__DEBUG_CLIENT_SECRET) {
+    const payload = data !== undefined ? ` ${JSON.stringify(data)}` : '';
+    console.log(`[StripeConnect] ${msg}${payload}`);
+  }
+}
+
 export function initialize(
   publishableKey: string,
   fetchClientSecret: FetchClientSecret
@@ -39,14 +53,21 @@ export function initialize(
   listenerSubscription = emitter.addListener(
     'onFetchClientSecret',
     async () => {
+      logDebug('onFetchClientSecret received');
       if (!fetchClientSecretCallback) {
+        logDebug('provideClientSecret(null) — no fetch callback');
         NativeStripeWrapper.provideClientSecret(null);
         return;
       }
       try {
         const secret = await fetchClientSecretCallback();
+        logDebug('fetchClientSecret resolved', {
+          hasSecret: !!secret,
+          secretLength: secret?.length ?? 0,
+        });
         NativeStripeWrapper.provideClientSecret(secret);
-      } catch {
+      } catch (e) {
+        logDebug('fetchClientSecret threw', e);
         NativeStripeWrapper.provideClientSecret(null);
       }
     }

@@ -308,6 +308,27 @@ The library bridges React Native to the native Stripe Connect SDKs:
 
 4. **`presentAccountOnboarding`** creates an `AccountOnboardingController` and presents it fullscreen. The returned Promise resolves when the user exits the flow.
 
+## Debugging the onboarding modal (infinite spinner)
+
+If the modal opens but only shows a spinner that never finishes, the Stripe SDK is waiting for a **client secret** from your app. Use this checklist:
+
+1. **Enable debug logging**  
+   Call `enableClientSecretDebug(true)` (e.g. in `__DEV__`) so the library logs the client-secret flow:
+   - `onFetchClientSecret received` — native side requested a secret; if you never see this, the native→JS event may not be firing (e.g. on iOS, ensure `initialize` runs before opening the modal so the event listener is registered).
+   - `fetchClientSecret resolved` / `provideClientSecret(null)` — your `fetchClientSecret` ran and the result was sent back; if you see `hasSecret: false` or `provideClientSecret(null)`, the backend or URL is the problem.
+
+2. **Verify your backend and URL**  
+   - Use a **real** endpoint URL (not a placeholder like `https://your-server.example.com/account_session`).  
+   - The endpoint must **POST** and return JSON with `client_secret` (from Stripe’s Account Session).  
+   - Test the endpoint (e.g. with curl or Postman); it should return 200 and a valid `client_secret`.
+
+3. **Handle errors in `fetchClientSecret`**  
+   - Log or handle `response.ok` and network errors.  
+   - If the fetch fails or returns non-OK, the library still calls `provideClientSecret(null)` so the native side can stop waiting; the user may then see a load error via `onLoadError`.
+
+4. **Call `initialize` before opening the modal**  
+   - `initialize` registers the listener for `onFetchClientSecret`. If you open the modal before `initialize` has run, the native request may never be answered and the spinner will hang.
+
 ## Contributing
 
 See the [contributing guide](CONTRIBUTING.md) for development workflow instructions.

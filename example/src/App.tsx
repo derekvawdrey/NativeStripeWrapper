@@ -11,20 +11,28 @@ import {
   initialize,
   presentAccountOnboarding,
   onLoadError,
+  enableClientSecretDebug,
 } from '@banrendi/stripe-connect-wrapper';
 
 const PUBLISHABLE_KEY = 'pk_test_YOUR_KEY_HERE';
 const ACCOUNT_SESSION_URL = 'https://your-server.example.com/account_session';
 
+// Log client-secret flow to debug infinite spinner in the modal.
+if (__DEV__) enableClientSecretDebug(true);
+
 async function fetchClientSecret(): Promise<string | null> {
   try {
     const response = await fetch(ACCOUNT_SESSION_URL, { method: 'POST' });
     if (!response.ok) {
+      if (__DEV__) console.warn('[fetchClientSecret] response not ok', response.status);
       return null;
     }
-    const { client_secret } = await response.json();
+    const data = await response.json();
+    const client_secret = data?.client_secret ?? null;
+    if (__DEV__) console.log('[fetchClientSecret] got secret?', !!client_secret);
     return client_secret;
-  } catch {
+  } catch (e) {
+    if (__DEV__) console.warn('[fetchClientSecret] error', e);
     return null;
   }
 }
