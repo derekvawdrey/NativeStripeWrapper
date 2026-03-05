@@ -1,0 +1,8 @@
+framework module BanrendiNativeStripeWrapper {
+  umbrella header "../Headers/BanrendiNativeStripeWrapper-umbrella.h"
+  export *
+}
+module BanrendiNativeStripeWrapper.Swift {
+  header "BanrendiNativeStripeWrapper-Swift.h"
+  requires objc
+}
