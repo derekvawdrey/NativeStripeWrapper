@@ -95,20 +95,21 @@ RCT_EXPORT_METHOD(provideClientSecret:(NSString *)secret)
 
 RCT_EXPORT_METHOD(addListener:(NSString *)eventName)
 {
-    // Required for RCTEventEmitter
+    [super addListener:eventName];
 }
 
 RCT_EXPORT_METHOD(removeListeners:(double)count)
 {
-    // Required for RCTEventEmitter
+    [super removeListeners:count];
 }
 
 #pragma mark - StripeConnectBridgeDelegate
 
 - (void)bridgeDidRequestClientSecret {
-    if (_hasListeners) {
-        [self sendEventWithName:@"onFetchClientSecret" body:@{}];
-    }
+    // Always send: RCTEventEmitter's _hasListeners can be false due to bridge timing
+    // (startObserving not yet propagated) even when JS has registered. Without this,
+    // the event is never sent and the client-secret flow never starts.
+    [self sendEventWithName:@"onFetchClientSecret" body:@{}];
 }
 
 - (void)bridgeDidExit {
